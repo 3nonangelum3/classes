@@ -35,8 +35,6 @@ class MenuCard {
         this.parent.append(element);
     }
 }
-
-
 //Variables
 const tabs = document.querySelectorAll('.tabheader__item'),
     tabsContent = document.querySelectorAll('.tabcontent'),
@@ -51,12 +49,6 @@ const tabs = document.querySelectorAll('.tabheader__item'),
         failure: 'Что-то пошло не так...'
     };
 let modalTimerId = null;
-
-
-
-
-
-
 //Fuctions
 //Tabs
 function hideTabContent() {
@@ -151,6 +143,7 @@ function showThanksModal(message) {
         closeModal();
     }, 4000);
 }
+//Server
 function postData(form) {
     form.addEventListener('submit', (e) => { 
         e.preventDefault();
@@ -239,16 +232,3 @@ new MenuCard(
 forms.forEach(item => {
     postData(item);
 });
-
-
-
-
-
-
-
-// Forms
-
-
-
-
-
