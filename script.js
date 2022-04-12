@@ -1,8 +1,11 @@
-let tabs = document.querySelectorAll('.tabheader__item'),
+//Variables
+const tabs = document.querySelectorAll('.tabheader__item'),
     tabsContent = document.querySelectorAll('.tabcontent'),
-    tabsParent = document.querySelector('.tabheader__items');
+    tabsParent = document.querySelector('.tabheader__items'),
+    modalTrigger = document.querySelectorAll('[data-modal]'),
+    modal = document.querySelector('.modal');
 const deadline = '2022-04-13';
-
+//Fuctions
 function hideTabContent() {
     tabsContent.forEach(item => {
         item.classList.add('hide');
@@ -12,23 +15,11 @@ function hideTabContent() {
         item.classList.remove('tabheader__item_active');
     });
 }
-
 function showTabContent(i = 0) {
     tabsContent[i].classList.add('show', 'fade');
     tabsContent[i].classList.remove('hide');
     tabs[i].classList.add('tabheader__item_active');
 }
-tabsParent.addEventListener('click', function (event) {
-    const target = event.target;
-    if (target && target.classList.contains('tabheader__item')) {
-        tabs.forEach((item, i) => {
-            if (target == item) {
-                hideTabContent();
-                showTabContent(i);
-            }
-        });
-    }
-});
 
 function getTimeRemaining() {
     const t = Date.parse(deadline) - Date.parse(new Date()),
@@ -44,7 +35,6 @@ function getTimeRemaining() {
         'seconds': seconds
     };
 }
-
 function getZero(num) {
     if (num >= 0 && num <= 9) {
         return '0' + num;
@@ -52,7 +42,6 @@ function getZero(num) {
         return num;
     }
 }
-
 function setClock() {
     const timer = document.querySelector('.timer'),
         days = timer.querySelector("#days"),
@@ -70,21 +59,27 @@ function setClock() {
             }
         }, 1000);
 }
+//EventListners
+tabsParent.addEventListener('click', function (event) {
+    if (event.target && event.target.classList.contains('tabheader__item')) {
+        tabs.forEach((item, i) => {
+            if (event.target == item) {
+                hideTabContent();
+                showTabContent(i);
+            }
+        });
+    }
+});
 
 
-
-
-
-
-
+//Main flow
 hideTabContent();
 showTabContent();
 setClock('.timer', deadline);
 
 // Modal
 
-const modalTrigger = document.querySelectorAll('[data-modal]'),
-    modal = document.querySelector('.modal');
+
 
 modalTrigger.forEach(btn => {
     btn.addEventListener('click', openModal);
